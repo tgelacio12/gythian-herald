@@ -1,0 +1,40 @@
+/*
+    PROG3185 Final Project
+    TGstyle.css
+
+    Revision History
+        Tonnicca Gelacio, 2019-04-04: Created
+        Tonnicca Gelacio, 2019-04-13: Updated
+
+ */
+
+.main-bg {
+    background: url(../img/gwen_bg.png);
+    background-size: 100% 100%;
+    background-position:center center;
+    background-repeat:repeat-y;
+    background-attachment:scroll;
+}
+
+.temp-bg {
+    background: url(../img/gradient.jpg);
+    background-size: 100% 100%;
+    background-position:center center;
+    background-repeat:repeat-y;
+    background-attachment:scroll;
+}
+
+.bluebg {
+    background-color: #154360;
+}
+
+label.error{
+    color: #F00;
+    font-weight: bold;
+}
+
+input.error,
+select.error,
+textarea.error {
+    border: 1px red solid;
+}

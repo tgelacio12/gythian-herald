@@ -1,0 +1,625 @@
+<!--
+    PROG3185 Final Project
+    index.html
+
+    Revision History
+        Tonnicca Gelacio, 2019-04-04: Created
+        Tonnicca Gelacio, 2019-04-07: Updated
+        Tonnicca Gelacio, 2019-04-09: Updated
+        Tonnicca Gelacio, 2019-04-10: Updated
+        Tonnicca Gelacio, 2019-04-12: Updated
+        Tonnicca Gelacio, 2019-04-13: Updated
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gythian Herald</title>
+
+    <!--jQuery-->
+    <script src="js/lib/jquery-2.1.4.js"></script>
+
+    <!--jQuery mobile-->
+    <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+
+    <!-- jQuery Validation -->
+    <script src="js/lib/jquery.validate.js"></script>
+
+    <!--jQuery mobile css-->
+    <link rel="stylesheet" type="text/css" href="css/lib/jquery.mobile-1.4.5.css">
+
+    <!-- our scripts -->
+    <script src="js/database.js"></script>
+    <script src="js/gythianDAL.js"></script>
+    <script src="js/gythianFacade.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/global.js"></script>
+    <!-- Global must always be the last item to make sure that everything is loaded -->
+
+    <!-- TG stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/TGstyle.css">
+
+</head>
+
+<body>
+
+<!-- Home Page -->
+<div id="homePage" data-role="page" data-theme="b" class="main-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>Home</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home" class="ui-btn-active ui-state-persist">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <h1 align="center">Gythian Herald</h1>
+
+        <div>
+            <a href="#addNewBuildPage" data-role="button" id="btnCreateBuildHome" name="btnCreateBuildHome"
+               style="background-color: #154360;"> Create Custom Build</a>
+        </div>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- View All Heroes Page -->
+<div id="viewAllHeroesPage" data-role="page" data-theme="b" class="main-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>Hero List</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user" class="ui-btn-active ui-state-persist">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <h2 align="center">List of Vainglory Heroes</h2>
+
+        <ul id="lvHeroList" data-role="listview" data-inset="true">
+        </ul>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- Show Hero Page -->
+<div id="showHeroPage" data-role="page" data-theme="b" class="temp-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>View Hero</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user" class="ui-btn-active ui-state-persist">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <div id="displayHeroDetails">
+        </div>
+
+        <a href="#viewBuildByHeroPage" data-role="button" id="btnShowBuildByHero" name="btnShowBuildByHero"
+           style="background-color: #2874A6;">View Builds</a>
+        <a href="#" data-role="button" id="btnPreviousShow" name="btnPreviousShow" data-rel="back">Go Back</a>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- View All Items Page -->
+<div id="viewAllItemsPage" data-role="page" data-theme="b" class="main-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>Item List</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid" class="ui-btn-active ui-state-persist">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <h2 align="center">List of Items</h2>
+
+        <div data-role="controlgroup" data-type="horizontal" align="center">
+            <button type="button" id="btnAll" name="btnAll"  data-theme="b">All</button>
+            <button type="button" id="btnWP" name="btnWP"  data-theme="b">WP</button>
+            <button type="button" id="btnCP" name="btnCP"  data-theme="b">CP</button>
+            <button type="button" id="btnDef" name="btnDef"  data-theme="b">Def</button>
+            <button type="button" id="btnUtil" name="btnUtil"  data-theme="b">Util</button>
+        </div>
+
+        <ul id="lvItemList" data-role="listview" data-inset="true">
+        </ul>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- Show Item Page -->
+<div id="showItemPage" data-role="page" data-theme="b" class="main-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>View Item</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid" class="ui-btn-active ui-state-persist">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <div id="displayItemDetails">
+        </div>
+
+        <!--
+        <a href="#" data-role="button" id="btnPreviousItem" name="btnPreviousItem" data-rel="back" class="bluebg">Go Back</a>
+        -->
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- View Builds Page -->
+<div id="viewBuildsPage" data-role="page" data-theme="b" class="main-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>View Builds</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets" class="ui-btn-active ui-state-persist">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <h2 align="center">List of Custom Builds</h2>
+
+        <ul id="lvBuildList" data-role="listview" data-inset="true">
+
+        </ul>
+
+        <div>
+            <a href="#addNewBuildPage" data-role="button" id="btnCreateBuild" name="btnCreateBuild"
+               style="background-color: #154360;"> Create Custom Build</a>
+        </div>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- View Builds by Hero Page -->
+<div id="viewBuildByHeroPage" data-role="page" data-theme="b" class="main-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>View Builds for Hero</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets" class="ui-btn-active ui-state-persist">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <h2 align="center">List of Custom Builds</h2>
+
+        <ul id="lvBuildByHeroList" data-role="listview" data-inset="true">
+
+        </ul>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- Show Build Page -->
+<div id="showBuildPage" data-role="page" data-theme="b" class="main-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>View Build</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets" class="ui-btn-active ui-state-persist">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <div id="displayBuildDetails">
+        </div>
+
+        <table align="center" style="background-color: #3D4544; opacity: 0.9;">
+
+            <tr>
+                <td colspan="2" align="center"><b>Items</b></td>
+            </tr>
+
+            <tr id="item1details">
+            </tr>
+
+            <tr id="item2details">
+            </tr>
+
+            <tr id="item3details">
+            </tr>
+
+            <tr id="item4details">
+            </tr>
+
+            <tr id="item5details">
+            </tr>
+
+            <tr id="item6details">
+            </tr>
+
+        </table>
+
+        <br />
+
+
+        <div data-role="controlgroup" data-type="horizontal" align="center">
+            <button type="button" id="btnEditBuild" name="btnEditBuild"  data-theme="b" data-icon="edit" data-iconpos="left">Edit</button>
+            <button type="button" id="btnDeleteBuild" name="btnDeleteBuild"  data-theme="b" data-icon="delete" data-iconpos="left">Delete</button>
+        </div>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- Add Custom Build Page -->
+<div id="addNewBuildPage" data-role="page" data-theme="b" class="temp-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>Create New Build</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets" class="ui-btn-active ui-state-persist">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <h1 align="center">Create New Custom Build</h1>
+        <br />
+
+        <form id="frmAddNewBuild">
+
+            <h3>Build Details</h3>
+
+            <label for="txtAddBuildName">Build Name:</label>
+            <input type="text" id="txtAddBuildName" name="txtAddBuildName">
+
+            <label for="cboAddBuildType">Build Type:</label>
+            <select id="cboAddBuildType" name="cboAddBuildType" data-native-menu="false">
+            </select>
+
+            <br />
+
+            <h3>Hero Information</h3>
+
+            <label for="cboAddBuildHero">Hero:</label>
+            <select id="cboAddBuildHero" name="cboAddBuildHero" data-native-menu="false">
+            </select>
+
+            <label for="cboAddBuildRole">Role:</label>
+            <select id="cboAddBuildRole" name="cboAddBuildRole" data-native-menu="false">
+            </select>
+
+            <br />
+            <br />
+
+            <h3>Items</h3>
+
+            <label for="cboAddItem1Type">Item 1:</label>
+            <select id="cboAddItem1Type" name="cboAddItem1Type" data-native-menu="false">
+            </select>
+
+            <select id="cboAddItem1" name="cboAddItem1" data-native-menu="false">
+            </select>
+            <br />
+
+
+            <label for="cboAddItem2Type">Item 2:</label>
+            <select id="cboAddItem2Type" name="cboAddItem2Type" data-native-menu="false">
+            </select>
+
+            <select id="cboAddItem2" name="cboAddItem2" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboAddItem3Type">Item 3:</label>
+            <select id="cboAddItem3Type" name="cboAddItem3Type" data-native-menu="false">
+            </select>
+
+            <select id="cboAddItem3" name="cboAddItem3" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboAddItem4Type">Item 4:</label>
+            <select id="cboAddItem4Type" name="cboAddItem4Type" data-native-menu="false">
+            </select>
+
+            <select id="cboAddItem4" name="cboAddItem4" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboAddItem5Type">Item 5:</label>
+            <select id="cboAddItem5Type" name="cboAddItem5Type" data-native-menu="false">
+            </select>
+
+            <select id="cboAddItem5" name="cboAddItem5" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboAddItem6Type">Item 6:</label>
+            <select id="cboAddItem6Type" name="cboAddItem6Type" data-native-menu="false">
+            </select>
+
+            <select id="cboAddItem6" name="cboAddItem6" data-native-menu="false">
+            </select>
+            <br />
+
+            <div>
+                <button type="button" id="btnAddBuild" name="btnAddBuild"
+                        class="ui-btn-active">Save Build
+                </button>
+            </div>
+
+        </form>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- Modify Custom Build Page -->
+<div id="modifyBuildPage" data-role="page" data-theme="b" class="temp-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>View Builds</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets" class="ui-btn-active ui-state-persist">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <h1 align="center">Modify Build</h1>
+
+        <form id="frmEditBuild">
+
+            <h3>Build Details</h3>
+
+            <label for="txtEditBuildName">Build Name:</label>
+            <input type="text" id="txtEditBuildName" name="txtEditBuildName">
+
+            <label for="cboEditBuildType">Build Type:</label>
+            <select id="cboEditBuildType" name="cboEditBuildType" data-native-menu="false">
+            </select>
+
+            <br />
+
+            <h3>Hero Information</h3>
+
+            <label for="cboEditBuildHero">Hero:</label>
+            <select id="cboEditBuildHero" name="cboEditBuildHero" data-native-menu="false">
+            </select>
+
+            <label for="cboEditBuildRole">Role:</label>
+            <select id="cboEditBuildRole" name="cboEditBuildRole" data-native-menu="false">
+            </select>
+            <br />
+
+            <h3>Items</h3>
+
+            <label for="cboEditItem1Type">Item 1:</label>
+            <select id="cboEditItem1Type" name="cboEditItem1Type" data-native-menu="false">
+            </select>
+
+            <select id="cboEditItem1" name="cboEditItem1" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboEditItem2Type">Item 2:</label>
+            <select id="cboEditItem2Type" name="cboEditItem2Type" data-native-menu="false">
+            </select>
+
+            <select id="cboEditItem2" name="cboEditItem2" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboEditItem3Type">Item 3:</label>
+            <select id="cboEditItem3Type" name="cboEditItem3Type" data-native-menu="false">
+            </select>
+
+            <select id="cboEditItem3" name="cboEditItem3" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboEditItem4Type">Item 4:</label>
+            <select id="cboEditItem4Type" name="cboEditItem4Type" data-native-menu="false">
+            </select>
+
+            <select id="cboEditItem4" name="cboEditItem4" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboEditItem5Type">Item 5:</label>
+            <select id="cboEditItem5Type" name="cboEditItem5Type" data-native-menu="false">
+            </select>
+
+            <select id="cboEditItem5" name="cboEditItem5" data-native-menu="false">
+            </select>
+            <br />
+
+            <label for="cboEditItem6Type">Item 6:</label>
+            <select id="cboEditItem6Type" name="cboEditItem6Type" data-native-menu="false">
+            </select>
+
+            <select id="cboEditItem6" name="cboEditItem6" data-native-menu="false">
+            </select>
+            <br />
+
+            <div>
+                <button type="button" id="btnUpdateBuild" name="btnUpdateBuild"
+                        class="ui-btn-active">Update
+                </button>
+            </div>
+
+        </form>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+<!-- About Page -->
+<div id="aboutPage" data-role="page" data-theme="b" class="main-bg">
+
+    <header data-role="header" data-position="fixed" data-theme="b">
+        <h1>About</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#homePage" data-icon="home">Home</a></li>
+                <li><a href="#viewAllHeroesPage" data-icon="user">Heroes</a></li>
+                <li><a href="#viewAllItemsPage" data-icon="grid">Items</a></li>
+                <li><a href="#viewBuildsPage" data-icon="bullets">Builds</a></li>
+                <li><a href="#aboutPage" data-icon="info" class="ui-btn-active ui-state-persist">About</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+
+        <h2 align="center">About</h2>
+
+        <p align="center">
+            Gythian Herald is a fan-made mobile app for Vainglory created by Tonnicca Gelacio as part of her
+            requirements for the course Programming: Mobile Application I.
+        </p>
+
+        <p align="center">
+            Image credits: AniviasNest, MataNataM, SEMC
+        </p>
+
+        <button type="button" data-role="button" id="btnClearSettings" name="btnClearSettings" data-theme="b">Clear Database</button>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h3>&copy; Copyright 2019.</h3>
+    </footer>
+</div>
+
+</body>
+</html>
